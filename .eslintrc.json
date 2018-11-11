@@ -1,3 +1,10 @@
 {
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "rules": {
+        "import/extensions": ["error", "always", { "js": "ignorePackages" }]
+    },
     "extends": "airbnb-base"
 }
