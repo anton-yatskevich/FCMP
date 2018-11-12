@@ -48,8 +48,24 @@ h3 {
     margin-top: 25px;
 }
 
-.news-wrapper {
+.news-wrapper,
+.search-wrapper {
     padding: 0 20px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.search-wrapper {
+    margin: 20px 0;
+}
+
+.search-wrapper label {
+    padding: 10px 10px 10px 0;
+    font-size: 1.2rem;
+}
+
+.search-wrapper select {
+    padding: 5px 10px;
 }
 
 .news-wrapper article {
@@ -70,7 +86,7 @@ h3 {
 
 .article-image {
     width: 100%;
-    max-width: 300px;
+    max-width: 200px;
     margin-right: 20px;
 }
 
@@ -112,4 +128,15 @@ footer {
     justify-content: center;
     border-top: 1px solid #000;
     overflow: hidden;
+}
+
+@media screen and (max-width: 559px) {
+    .article-image {
+        margin-bottom: 15px;
+        max-width: 300px;
+    }
+
+    .news-wrapper article {
+        justify-content: center;
+    }
 }
