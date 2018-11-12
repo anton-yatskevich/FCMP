@@ -43,13 +43,17 @@ h2 {
     font-size: 2rem;
 }
 
+h3 {
+    font-size: 1.7rem;
+    margin-top: 25px;
+}
+
 .news-wrapper {
     padding: 0 20px;
 }
 
 .news-wrapper article {
     display: flex;
-    align-items: flex-start;
     flex-wrap: wrap;
     padding: 20px 0;
     border-bottom: 2px solid rgb(161, 161, 161);
@@ -71,12 +75,30 @@ h2 {
 }
 
 .article-info {
+    display: flex;
+    flex-direction: column;
     flex-grow: 1;
     flex-basis: 300px;
+    min-height: 100%;
 }
 
-.article-info h3 {
+.article-info h4 {
+    font-size: 1.5rem;
     margin-bottom: 20px;
+}
+
+.article-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%
+}
+
+.article-description-footer {
+    display: flex;
+    justify-content: space-between;
+    color: grey;
+    margin-top: 15px;
 }
 
 footer {
