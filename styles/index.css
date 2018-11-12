@@ -34,6 +34,7 @@ header {
 }
 
 main {
+    width: 100%;
     padding-top: 110px;
     min-height: calc(100vh - 60px);
 }
@@ -133,7 +134,8 @@ footer {
 @media screen and (max-width: 559px) {
     .article-image {
         margin-bottom: 15px;
-        max-width: 300px;
+        margin-right: 0;
+        max-width: 350px;
     }
 
     .news-wrapper article {
