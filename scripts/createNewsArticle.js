@@ -1,4 +1,4 @@
-export default function createArticle(articleData, parentNode) {
+export default function (articleData, parentNode) {
   const {
     source,
     title,
@@ -8,7 +8,10 @@ export default function createArticle(articleData, parentNode) {
     publishedAt,
   } = articleData;
 
-  const publishDate = publishedAt.replace('T', ' ').slice(0, -4);
+  const dateArr = publishedAt.split('T');
+  const time = dateArr[1].slice(0, 5);
+  const publishDate = `${dateArr[0]} ${time}`;
+
   if (title && description && url && urlToImage) {
     const article = document.createElement('article');
     article.innerHTML = `

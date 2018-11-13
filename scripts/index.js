@@ -1,34 +1,45 @@
-import { API_KEY, TOP_NEWS_URL, SOURCES_URL } from './constants.js';
+import { API_KEY, TOP_NEWS_BASE_URL, SOURCES_BASE_URL } from './constants.js';
 import createArticle from './createNewsArticle.js';
-import getData from './getData.js';
+import loadData from './loadData.js';
 import createNewsList from './createArticlesList.js';
-import createSearchNode from './createSearchNode.js';
+import createSearchNode from './createSelectElement.js';
 import createSelectOption from './createSelectOption.js';
-import getUrlWithSource from './getUrlWithSource.js';
+import getUrl from './getUrl.js';
 
 const articlesContainer = document.getElementById('news-articles-wrapper');
 
-function getMostPopularNews(url) {
+function renderPopularNews(source) {
   const headerText = 'Most popular news:';
-  getData(url, headerText, createNewsList, articlesContainer, createArticle);
+  const url = getUrl(TOP_NEWS_BASE_URL, API_KEY, source);
+
+  loadData(url, headerText, createNewsList, articlesContainer, createArticle)
+    .then(data => createNewsList(data, headerText, articlesContainer, createArticle))
+    .catch((err) => {
+      throw new Error(err);
+    });
 }
 
-function onChangeHandler(value) {
+function onChangeHandler(source) {
   articlesContainer.innerHTML = '';
-  if (value) {
-    const urlWithSource = getUrlWithSource(value, API_KEY);
-    getMostPopularNews(urlWithSource);
-  } else {
-    getMostPopularNews(TOP_NEWS_URL);
-  }
+  renderPopularNews(source);
 }
 
-function getSources() {
-  const searchNodeWrapper = document.getElementById('search-wrapper');
-  const nodeText = 'Select news source: ';
-  getData(SOURCES_URL, nodeText, createSearchNode, searchNodeWrapper, createSelectOption)
-    .then(node => node.addEventListener('change', e => onChangeHandler(e.target.value)));
+function renderSources() {
+  const selectNodeWrapper = document.getElementById('select-wrapper');
+  const labelText = 'Select news source: ';
+  const sourcesUrl = getUrl(SOURCES_BASE_URL, API_KEY);
+
+  loadData(sourcesUrl)
+    .then(data => createSearchNode(data, labelText, selectNodeWrapper, createSelectOption))
+    .then(node => node.addEventListener('change', e => onChangeHandler(e.target.value)))
+    .catch((err) => {
+      throw new Error(err);
+    });
 }
 
-getSources();
-getMostPopularNews(TOP_NEWS_URL);
+function initApp() {
+  renderSources();
+  renderPopularNews();
+}
+
+document.addEventListener('DOMContentLoaded', initApp());

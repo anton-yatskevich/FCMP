@@ -50,22 +50,22 @@ h3 {
 }
 
 .news-wrapper,
-.search-wrapper {
+.select-wrapper {
     padding: 0 20px;
     width: 100%;
     max-width: 1200px;
 }
 
-.search-wrapper {
+.select-wrapper {
     margin: 20px 0;
 }
 
-.search-wrapper label {
+.select-wrapper label {
     padding: 10px 10px 10px 0;
     font-size: 1.2rem;
 }
 
-.search-wrapper select {
+.select-wrapper select {
     padding: 5px 10px;
 }
 
@@ -87,7 +87,7 @@ h3 {
 
 .article-image {
     width: 100%;
-    max-width: 200px;
+    width: 200px;
     margin-right: 20px;
 }
 
@@ -135,6 +135,7 @@ footer {
     .article-image {
         margin-bottom: 15px;
         margin-right: 0;
+        width: 100%;
         max-width: 350px;
     }
 
