@@ -1,4 +1,4 @@
-export default function (url) {
+function loadData(url) {
   return fetch(url)
     .then(res => res.json())
     .catch((err) => {

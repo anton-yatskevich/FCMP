@@ -1,4 +1,4 @@
-export default function (data, textValue, parentNode, callback) {
+function createSelectNode(data, textValue, parentNode, callback) {
   const { sources } = data;
   const defaultOption = {
     name: 'All sources',

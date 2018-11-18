@@ -1,4 +1,4 @@
-export default function (data, headerText, parentNode, callback) {
+function createNewsList(data, headerText, parentNode, callback) {
   const { articles } = data;
   const wrapper = document.createDocumentFragment();
   const newsListHeader = document.createElement('h3');

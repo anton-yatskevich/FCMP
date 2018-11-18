@@ -1,4 +1,4 @@
-export default function (articleData, parentNode) {
+function createNewsArticle(articleData, parentNode) {
   const {
     source,
     title,

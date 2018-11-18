@@ -4,8 +4,8 @@
   "description": "",
   "main": "\u001b[html)",
   "scripts": {
-    "build": "babel ./scripts --out-file compiled.js",
-    "watch": "babel ./scripts --watch --out-file compiled.js",
+    "build": "babel ./scripts --out-dir compiled",
+    "watch": "babel ./scripts --watch --out-dir compiled",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

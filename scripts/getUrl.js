@@ -1,4 +1,4 @@
-export default function (BASE_URL, API_KEY, source) {
+function getUrl(BASE_URL, API_KEY, source) {
   let url;
 
   if (source) {
