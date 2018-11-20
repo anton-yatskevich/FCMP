@@ -1,7 +1,13 @@
-function loadData(url) {
-  return fetch(url)
-    .then(res => res.json())
-    .catch((err) => {
-      throw new Error(err);
-    });
+async function loadData(url) {
+  try {
+    const response = await fetch(url)
+    if (!response.ok) {
+      throw new Error(response.statusText);
+    } else {
+      const result = await response.json();
+      return result;
+    }
+  } catch (err) {
+    throw new Error(err);
+  }
 }
