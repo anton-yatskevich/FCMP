@@ -26,5 +26,9 @@
     "eslint": "^5.9.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0",
+    "whatwg-fetch": "^3.0.0"
   }
 }
