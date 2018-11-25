@@ -1,3 +1,3 @@
-# FCMP-ES6
+# FCMP-2018
 
-Hometask ES2015: [Show page](https://es2015-fcmp.netlify.com/)
+Hometask Webpack: [Show page](https://webpack-fcmp.netlify.com/)
