@@ -4,21 +4,43 @@
   "description": "",
   "main": "\u001b[html)",
   "scripts": {
+    "start": "webpack-dev-server --env dev --open",
+    "build:dev": "webpack -d --env dev",
+    "build:prod": "webpack -p --env prod",
+    "watch": "webpack --watch --env dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/anton-yatskevich/FCMP-ES6.git"
+    "url": "git+https://github.com/anton-yatskevich/FCMP-2018.git"
   },
   "author": "Anton Yatskevich",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/anton-yatskevich/FCMP-ES6/issues"
+    "url": "https://github.com/anton-yatskevich/FCMP-2018/issues"
   },
-  "homepage": "https://github.com/anton-yatskevich/FCMP-ES6#readme",
+  "homepage": "https://github.com/anton-yatskevich/FCMP-2018#readme",
   "devDependencies": {
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.1.6",
+    "babel-loader": "^8.0.4",
+    "clean-webpack-plugin": "^1.0.0",
+    "css-loader": "^1.0.1",
     "eslint": "^5.9.0",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0"
+    "eslint-plugin-import": "^2.14.0",
+    "file-loader": "^2.0.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.4.5",
+    "postcss-loader": "^3.0.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.26.0",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
+  },
+  "dependencies": {
+    "autoprefixer": "^9.3.1",
+    "babel-polyfill": "^6.26.0"
   }
 }
