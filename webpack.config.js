@@ -5,10 +5,11 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = env => ({
   mode: env === 'dev' ? 'development' : 'production',
-  entry: './src/index.js',
+  entry: './src/StartPage/index.js',
   output: {
-    filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
+    chunkFilename: '[name].bundle.js',
   },
   module: {
     rules: [
@@ -46,6 +47,14 @@ module.exports = env => ({
           },
         ],
       },
+      {
+        test: /\.json$/,
+        use: [
+          {
+            loader: path.resolve('./src/loader/json-loader.js'),
+          },
+        ],
+      },
     ],
   },
   plugins: [
@@ -55,7 +64,7 @@ module.exports = env => ({
       filename: 'index.html',
     }),
     new MiniCssExtractPlugin({
-      filename: 'main.css',
+      filename: '[name].css',
     }),
   ],
   devtool: env === 'dev' ? 'source-map' : 'none',
