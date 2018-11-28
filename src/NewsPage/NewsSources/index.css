@@ -1,0 +1,18 @@
+.select-wrapper {
+    padding: 0 20px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.select-wrapper {
+    margin: 20px 0;
+}
+
+.select-wrapper label {
+    padding: 10px 10px 10px 0;
+    font-size: 1.2rem;
+}
+
+.select-wrapper select {
+    padding: 5px 10px;
+}
