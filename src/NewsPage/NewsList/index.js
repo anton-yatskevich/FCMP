@@ -1,4 +1,7 @@
-export default function (articleData, parentNode) {
+import './index.css';
+
+
+function createArticle(articleData, parentNode) {
   const {
     source,
     title,
@@ -26,3 +29,18 @@ export default function (articleData, parentNode) {
     parentNode.appendChild(article);
   }
 }
+
+function createArticlesList(data) {
+  const { articles } = data;
+  const parentNode = document.getElementById('news-articles-wrapper');
+  const wrapper = document.createDocumentFragment();
+  const newsListHeader = document.createElement('h3');
+
+  newsListHeader.textContent = 'Most popular news:';
+  wrapper.appendChild(newsListHeader);
+  articles.map(article => createArticle(article, wrapper));
+  parentNode.innerHTML = '';
+  parentNode.appendChild(wrapper);
+}
+
+export default createArticlesList;
