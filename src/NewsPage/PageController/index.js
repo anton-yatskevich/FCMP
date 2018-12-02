@@ -8,7 +8,6 @@ import './index.css';
 
 function renderPage() {
   const appWrapper = document.getElementById('app-container');
-  appWrapper.innerHTML = '';
   appWrapper.innerHTML = NewsPageTemplate;
 }
 
