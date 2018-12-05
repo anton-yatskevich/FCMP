@@ -4,7 +4,13 @@
         "es6": true
     },
     "rules": {
-        "import/extensions": ["error", "always", { "js": "ignorePackages" }]
+        "import/extensions": ["error", "always", { "js": "ignorePackages" }],
     },
-    "extends": "airbnb-base"
+    "extends": "airbnb-base",
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "sourceType": "module",
+        "allowImportExportEverywhere": false,
+        "codeFrame": true
+    }
 }
