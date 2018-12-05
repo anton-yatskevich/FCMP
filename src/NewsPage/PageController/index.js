@@ -1,31 +1,44 @@
 import { TOP_NEWS_BASE_URL, SOURCES_BASE_URL } from '../constants';
-import { getUrl, loadData } from '../API';
-import createNewsList from '../NewsList';
-import createSearchNode from '../NewsSources';
+import getUrl from '../utils/getUrl';
+import RequestFactory from '../API/index';
+import NewsListCtrl from '../NewsList';
+import NewsSourcesSelect from '../NewsSources';
 import NewsPageTemplate from './index.html';
 import './index.css';
 
+class PageCtrl {
+  constructor() {
+    this.appWrapper = document.getElementById('app-container');
+    this.NewsListCtrl = new NewsListCtrl();
+    this.NewsSourcesSelect = new NewsSourcesSelect();
+  }
 
-function renderPage() {
-  const appWrapper = document.getElementById('app-container');
-  appWrapper.innerHTML = NewsPageTemplate;
+  init() {
+    this.renderPage();
+    this.renderSources();
+    this.renderPopularNews();
+  }
+
+  renderPage() {
+    this.appWrapper.innerHTML = NewsPageTemplate;
+  }
+
+  async renderPopularNews(source) {
+    const url = getUrl(TOP_NEWS_BASE_URL, source);
+    const { request } = new RequestFactory({ method: 'GET', url });
+    const response = await request.send();
+    if (response) {
+      this.NewsListCtrl.createArticlesList(response);
+    }
+  }
+
+  async renderSources() {
+    const url = getUrl(SOURCES_BASE_URL);
+    const { request } = new RequestFactory({ method: 'GET', url });
+    const response = await request.send();
+    const selectNode = this.NewsSourcesSelect.createSelectNode(response);
+    selectNode.addEventListener('change', e => this.renderPopularNews(e.target.value));
+  }
 }
 
-async function renderPopularNews(source) {
-  const url = getUrl(TOP_NEWS_BASE_URL, source);
-  const response = await loadData(url);
-  createNewsList(response);
-}
-
-async function renderSources() {
-  const sourcesUrl = getUrl(SOURCES_BASE_URL);
-  const response = await loadData(sourcesUrl);
-  const selectNode = createSearchNode(response);
-  selectNode.addEventListener('change', e => renderPopularNews(e.target.value));
-}
-
-export default function initApp() {
-  renderPage();
-  renderSources();
-  renderPopularNews();
-}
+export default PageCtrl;

@@ -4,8 +4,9 @@ import btnText from './buttonText.json';
 
 
 function goToNewsPage() {
-  import( /* webpackChunkName: "newsPage" */ '../NewsPage')
-    .then(module => module.default())
+  import(/* webpackChunkName: "newsPage" */ '../NewsPage')
+    .then(module => new module.default())
+    .then(app => app.init());
 }
 
 function initApp() {
