@@ -1,80 +1,46 @@
 const fs = require('fs');
 const util = require('util');
 const path = require('path');
-
-const readfile = util.promisify(fs.readFile);
-const writefile = util.promisify(fs.writeFile);
-
-const articlesPath = path.join(__dirname, '../data/articles.json');
+const Article = require('../models/Article');
 
 function getArticles() {
-    return readfile(articlesPath)
-        .then(articles => JSON.parse(articles));
+    return Article.find({});
 }
 
 function getArticle(id) {
-    return getArticles()
-        .then(articles => articles.find(article => article.id === Number(id)));
+    return Article.findOne({ id });
 }
 
 function saveArticle(article) {
     return getArticles()
         .then(articles => {
-            try {
-                const id = articles[articles.length - 1].id + 1;
-                const articleWithId = Object.assign({}, { id }, article);
-                const newArticles = articles.concat(articleWithId);
-                
-                return writefile(articlesPath, JSON.stringify(newArticles));
-            } catch (error) {
-                const err = {status: 500, message: 'Something went wrong'};
-                return err;
-            }
-            
-        })
+            const id = articles[articles.length - 1].id + 1;
+            const articleWithId = Object.assign({}, { id }, article);
+            const ArticleModel = new Article(articleWithId);
+            return ArticleModel.save();
+        });
 }
 
 function updateArticle(id, body) {
-    return getArticles()
-        .then(articles => {
-            try {
-                const article = articles.find(article => article.id === Number(id))
-                if (article) {
-                    const index = articles.indexOf(article);
-                    const newArticles = [...articles];
-                    newArticles[index] = Object.assign({}, { id: Number(id) }, body);
-    
-                    return writefile(articlesPath, JSON.stringify(newArticles));
-                } else {
-                    const articleWithId = Object.assign({}, { id: Number(id) }, body);
-                    const newArticles = articles.concat(articleWithId);
-                    
-                    return writefile(articlesPath, JSON.stringify(newArticles));
-                }
-            } catch (error) {
-                const err = {status: 500, message: 'Something went wrong'};
-                return err;
+    return Article.updateOne({ id }, body, { upsert: true })
+        .then((res) => {
+            if (res.upserted) {
+                return 'New article is created'
+            } else if (res.nModified) {
+                return 'Updated'
+            } else {
+                return 'No changes'
             }
-            
-        })
+        });
 }
 
 function deleteArticle(id) {
-    return getArticles() 
-        .then(articles => {     
-            try {
-                const newArticles = articles.filter(article => article.id !== Number(id));
-                if (articles.length === newArticles.length) {
-                    const err = {status: 404, message: 'Article not found'};
-                    return err;
-                }
-                return writefile(articlesPath, JSON.stringify(newArticles));
-            } catch (error) {
-                const err = {status: 500, message: 'Something went wrong'};
-                return err;
+    return Article.deleteOne({ id })
+        .then((res) => {
+            if (!res.deletedCount) {
+                return {status: 404, message: 'Incorrect article id'};
             }
-            
-        })
+        });
 }
 
 module.exports = {

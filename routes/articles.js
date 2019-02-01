@@ -33,12 +33,8 @@ router.get('/:id', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
     articlesCtrl.saveArticle(req.body)
-        .then((err) => {
-            if (err) {
-                next(err);
-            } else {
-                res.end('Saved')
-            }
+        .then(() => {
+            res.end('Saved');
         })
         .catch(() => {
             next();
@@ -47,11 +43,11 @@ router.post('/', (req, res, next) => {
 
 router.put('/:id', (req, res, next) => {
     articlesCtrl.updateArticle(req.params.id, req.body)
-        .then((err) => {
-            if (err) {
-                next(err);
+        .then((response) => {
+            if (response) {
+                res.end(response);
             } else {
-                res.end('Updated');
+                next();
             }
         })
         .catch(() => {

@@ -1,11 +1,12 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const path = require('path');
 const fs = require('fs');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const router = require('./routes')
 const errorHandler = require('./middlewares/errorHandler')
-const port = 3000;
+const { MONGODB_URL, APP_PORT } = require('./constants/config');
 
 const app = express();
 
@@ -22,4 +23,8 @@ app.use(morgan(':method :url :status :date[web]', { stream: accessLogStream }));
 app.use(router);
 app.use(errorHandler);
 
-app.listen(port, () => console.log(`App listening on port ${port}`));
+mongoose.connect(MONGODB_URL, { useNewUrlParser: true });
+mongoose.connection
+    .on('error', console.log)
+    .once('open', () => app.listen(APP_PORT, () => console.log(`App listening on port ${APP_PORT}...`)));
+
