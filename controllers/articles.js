@@ -1,6 +1,3 @@
-const fs = require('fs');
-const util = require('util');
-const path = require('path');
 const Article = require('../models/Article');
 
 function getArticles() {

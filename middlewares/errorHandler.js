@@ -4,7 +4,7 @@ function errorHandler(err, req, res, next) {
         res.render('error', err);
     } else {
         res.status(500);
-        res.render('error', {status: 500, messge: 'Something went wrong!'});
+        res.render('error', {status: 500, message: 'Something went wrong!'});
     }
 }
 

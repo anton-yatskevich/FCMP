@@ -3,6 +3,14 @@ const articlesCtrl = require('../controllers/articles');
 
 const router = express.Router();
 
+const isAuthenticated = (req, res, next) => {
+	if (req.isAuthenticated()) {
+		return next();
+	} else {
+		res.send('You should login with your username and password');
+	}
+}
+
 router.get('/', (req, res, next) => {
     articlesCtrl.getArticles()
         .then(articles => {
@@ -31,7 +39,7 @@ router.get('/:id', (req, res, next) => {
         });
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', isAuthenticated, (req, res, next) => {
     articlesCtrl.saveArticle(req.body)
         .then(() => {
             res.end('Saved');
@@ -41,7 +49,7 @@ router.post('/', (req, res, next) => {
         });
 });
 
-router.put('/:id', (req, res, next) => {
+router.put('/:id', isAuthenticated, (req, res, next) => {
     articlesCtrl.updateArticle(req.params.id, req.body)
         .then((response) => {
             if (response) {
@@ -55,7 +63,7 @@ router.put('/:id', (req, res, next) => {
         });
 });
 
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', isAuthenticated, (req, res, next) => {
     articlesCtrl.deleteArticle(req.params.id)
         .then((err) => {
             if (err) {
