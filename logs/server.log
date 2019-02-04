@@ -79,3 +79,4 @@ GET /news/1 200 Mon, 04 Feb 2019 12:12:46 GMT
 DELETE /news/44 404 Mon, 04 Feb 2019 12:14:17 GMT
 GET /auth/logout 200 Mon, 04 Feb 2019 12:15:02 GMT
 DELETE /news/44 200 Mon, 04 Feb 2019 12:15:40 GMT
+POST /auth/login 200 Mon, 04 Feb 2019 19:47:22 GMT
