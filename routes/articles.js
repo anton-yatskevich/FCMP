@@ -25,7 +25,7 @@ router.get('/', (req, res, next) => {
         })
 });
 
-router.get('/:id', (req, res, next) => {
+router.get('/:id', isAuthenticated, (req, res, next) => {
     articlesCtrl.getArticle(req.params.id)
         .then(article => {
             if (article) {
