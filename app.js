@@ -1,4 +1,3 @@
-require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
@@ -8,7 +7,9 @@ const router = require('./routes')
 const errorHandler = require('./middlewares/errorHandler')
 const passport = require('./config/passport');
 const session = require('express-session');
-const { MONGODB_URL, APP_PORT, SECRET } = process.env;
+const MongoStore = require('connect-mongo')(session);
+const { MONGODB_URL, APP_PORT, SECRET } = require('./config/constants');
+const PORT = process.env.PORT || APP_PORT;
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use(express.urlencoded({
 app.use(express.json());
 app.use(session({
     secret: SECRET,
+    store: new MongoStore({ url: MONGODB_URL }),
     resave: false,
     saveUninitialized: true,
 }));
@@ -35,5 +37,5 @@ app.use(errorHandler);
 mongoose.connect(MONGODB_URL, { useNewUrlParser: true });
 mongoose.connection
     .on('error', console.log)
-    .once('open', () => app.listen(APP_PORT, () => console.log(`App listening on port ${APP_PORT}...`)));
+    .once('open', () => app.listen(PORT, () => console.log(`App listening on port ${(PORT)}...`)));
 
