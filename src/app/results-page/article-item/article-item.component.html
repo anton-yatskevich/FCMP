@@ -1,0 +1,23 @@
+<article>
+  <a href={{article.url}}>
+      <img class="article-image" src={{article.urlToImage}} alt="article-image"></a>
+  <div class="article-info">
+    <a href={{article.url}}>
+      <h4>{{article.title}}</h4>
+    </a>
+    <div class="article-description">
+        <p>{{article.description}}</p>
+        <a [routerLink]="['article', article.id]" [routerLinkActive]="'active-link'">
+          Read more...
+        </a>
+        <p class="article-description-footer">
+          <a href="#">{{article.source.name}}</a>
+          <span>{{article.publishedAt}}</span>
+        </p>
+    </div>
+  </div>
+  <div class="buttons-wrapper" *ngIf="article.isLocalArticle">
+    <button [routerLink]="['/edit', article.id]">Edit</button>
+    <button>Delete</button>
+  </div>
+</article>

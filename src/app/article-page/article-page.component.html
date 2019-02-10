@@ -1,0 +1,15 @@
+<div class="article-page">
+  <img class="article-image" src={{article.urlToImage}} alt="article-image">
+  <div>
+    <h2>{{article.title}}</h2>
+    <p>{{article.content}}</p>
+    <p>Date: {{article.publishedAt}}</p>
+    <p>Author: {{article.author}}</p>
+  </div>
+  <div>
+    <div class="buttons-wrapper" *ngIf="article.isLocalArticle">
+      <button [routerLink]="['/edit', article.id]">Edit</button>
+      <button>Delete</button>
+    </div>
+  </div>
+</div>

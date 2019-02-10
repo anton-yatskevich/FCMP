@@ -1,0 +1,37 @@
+<div class="article-form__wrapper">
+    <h2>{{id ? 'Edit article' : 'Create article'}}</h2>
+    <form [formGroup]="articleForm" (submit)="submitForm()" class="article-form">
+        <div>
+            <label>Heading:</label>
+            <input type="text" [formControl]="articleHeading">
+        </div>
+        <div>
+            <label>Short description:</label>
+            <input type="text" [formControl]="articleShortDescription">
+        </div>
+        <div>
+            <label>Content:</label>
+            <input type="text" [formControl]="articleContent">
+        </div>
+        <div>
+            <label>Image URL:</label>
+            <input type="text" [formControl]="imageUrl">
+        </div>
+        <div>
+            <label>Author:</label>
+            <input type="text" [formControl]="author">
+        </div>
+        <div>
+            <label>Source:</label>
+            <input type="text" [formControl]="source">
+        </div>
+        <div>
+            <label>Date:</label>
+            <input type="text" [formControl]="date">
+        </div>
+        <div>
+            <button routerLink="/results">Close</button>
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+</div> 
