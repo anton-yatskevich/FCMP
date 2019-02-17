@@ -13,6 +13,8 @@ import { TextFilterComponent } from './results-page/controls-panel/text-filter/t
 import { SourceSelectComponent } from './results-page/controls-panel/source-select/source-select.component';
 import { LocalFilterComponent } from './results-page/controls-panel/local-filter/local-filter.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ArticlesFilterPipe } from './pipes/articles-filter.pipe';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -25,12 +27,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ResultsPageComponent,
     TextFilterComponent,
     SourceSelectComponent,
-    LocalFilterComponent
+    LocalFilterComponent,
+    ArticlesFilterPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule
   ],
   providers: [],

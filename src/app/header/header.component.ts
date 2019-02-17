@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ArticlesService } from '../services/articles.service'
 
 @Component({
   selector: 'app-header',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  public source: string;
 
-  constructor() { }
+  constructor(private articlesService: ArticlesService) { }
 
   ngOnInit() {
+    this.articlesService.updatedSource.subscribe((sourceValue: string) => {
+      this.source = sourceValue;
+    })
   }
-
 }
