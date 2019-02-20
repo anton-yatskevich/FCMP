@@ -5,21 +5,20 @@ function getArticles() {
 }
 
 function getArticle(id) {
-    return Article.findOne({ id });
+    return Article.findOne({ _id: id });
 }
 
 function saveArticle(article) {
     return getArticles()
         .then(articles => {
-            const id = articles[articles.length - 1].id + 1;
-            const articleWithId = Object.assign({}, { id }, article);
+            const articleWithId = Object.assign({}, { isLocal: true }, article);
             const ArticleModel = new Article(articleWithId);
             return ArticleModel.save();
         });
 }
 
 function updateArticle(id, body) {
-    return Article.updateOne({ id }, body, { upsert: true })
+    return Article.updateOne({ _id: id }, body, { upsert: true })
         .then((res) => {
             if (res.upserted) {
                 return 'New article is created'
@@ -32,10 +31,10 @@ function updateArticle(id, body) {
 }
 
 function deleteArticle(id) {
-    return Article.deleteOne({ id })
+    return Article.deleteOne({ _id: id })
         .then((res) => {
             if (!res.deletedCount) {
-                return {status: 404, message: 'Incorrect article id'};
+                return JSON.stringify({status: 404, message: 'Incorrect article id'});
             }
         });
 }

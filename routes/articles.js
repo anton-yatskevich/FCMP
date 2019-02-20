@@ -39,21 +39,21 @@ router.get('/:id', isAuthenticated, (req, res, next) => {
         });
 });
 
-router.post('/', isAuthenticated, (req, res, next) => {
+router.post('/', (req, res, next) => {
     articlesCtrl.saveArticle(req.body)
         .then(() => {
-            res.end('Saved');
+            res.end(JSON.stringify('Saved'));
         })
         .catch(() => {
             next();
         });
 });
 
-router.put('/:id', isAuthenticated, (req, res, next) => {
+router.put('/:id', (req, res, next) => {
     articlesCtrl.updateArticle(req.params.id, req.body)
         .then((response) => {
             if (response) {
-                res.end(response);
+                res.end(JSON.stringify(response));
             } else {
                 next();
             }
@@ -63,13 +63,13 @@ router.put('/:id', isAuthenticated, (req, res, next) => {
         });
 });
 
-router.delete('/:id', isAuthenticated, (req, res, next) => {
+router.delete('/:id', (req, res, next) => {
     articlesCtrl.deleteArticle(req.params.id)
         .then((err) => {
             if (err) {
                 next(err);
             } else {
-                res.end('Deleted');
+                res.end(JSON.stringify('Deleted'));
             }
         })
         .catch(() => {
