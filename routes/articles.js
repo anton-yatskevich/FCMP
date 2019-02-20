@@ -15,7 +15,7 @@ router.get('/', (req, res, next) => {
     articlesCtrl.getArticles()
         .then(articles => {
             if (articles) {
-                res.json(articles);
+                res.json({status: 'ok', totalResults: articles.length, articles: articles});
             } else {
                 next({status: 404, message: 'Articles not found'});
             }
