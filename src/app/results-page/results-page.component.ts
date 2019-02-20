@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../services/api.service';
+import { ArticlesService } from '../services/articles.service';
 import * as articlesList from '../../assets/articles-mock.json';
 import * as sources from '../../assets/sources-mock.json';
 
@@ -10,28 +10,37 @@ import * as sources from '../../assets/sources-mock.json';
 })
 
 export class ResultsPageComponent implements OnInit {
-  public articles: object[];
+  public articles: object[] = [];
   public sources: string[] = sources;
   public selectedSource: string;
-  public char: string = 'Conor';
+  public query: string;
+  public limit: number = 4;
+  public onlyLocal: boolean = false;
 
-  constructor(private apiService: ApiService) { }
+  constructor(
+    private articlesService: ArticlesService
+  ) { }
 
   ngOnInit() {
-    this.articles = articlesList.slice(0, 4);
-  }
-
-  onChangeSource(source: string): void {
-    this.selectedSource = source;
+    this.articlesService.updateFiterValue.subscribe((value: string) => {
+      this.query = value;
+    });
+    this.articlesService.updateLocalFilter.subscribe((localFilterValue: boolean) => {
+      this.onlyLocal = localFilterValue;
+    });
+    this.articlesService.updateArticles.subscribe((articles: [{}]) => {
+      this.articles = articles;
+      this.limit = 4;
+    });
   }
 
   isAllNewsLoaded(): boolean {
-    return articlesList.length === this.articles.length
+    return this.articles.length <= this.limit;
   }
 
   onLoadMoreClick(): void {
     if (!this.isAllNewsLoaded()) {  
-      this.articles = articlesList.slice(0, this.articles.length + 5);
+      this.limit += 3;
     }
   }
 

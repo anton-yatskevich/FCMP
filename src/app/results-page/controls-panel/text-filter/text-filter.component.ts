@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ArticlesService } from '../../../services/articles.service'
 
 @Component({
   selector: 'app-text-filter',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TextFilterComponent implements OnInit {
 
-  constructor() { }
+  constructor(private articlesService: ArticlesService) { }
 
   ngOnInit() {
   }
 
+  onFilterClick(value: string) {
+    this.articlesService.updateFiterValue.emit(value);
+  }
 }

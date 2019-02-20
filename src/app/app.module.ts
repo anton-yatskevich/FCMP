@@ -15,6 +15,8 @@ import { LocalFilterComponent } from './results-page/controls-panel/local-filter
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ArticlesFilterPipe } from './pipes/articles-filter.pipe';
 import { HttpClientModule } from '@angular/common/http';
+import { ArticlesService } from './services/articles.service';
+import { ArticlesLocalFilterPipe } from './pipes/articles-local-filter.pipe'
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { HttpClientModule } from '@angular/common/http';
     TextFilterComponent,
     SourceSelectComponent,
     LocalFilterComponent,
-    ArticlesFilterPipe
+    ArticlesFilterPipe,
+    ArticlesLocalFilterPipe
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,9 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    ArticlesService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

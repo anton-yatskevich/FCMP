@@ -10,5 +10,12 @@ export interface Article {
     url: string,
     urlToImage: string,
     publishedAt: string,
-    content: string
+    content: string,
+    isLocal?: boolean
+}
+
+export interface ArticleResponse {
+    status: string,
+    totalResults: number,
+    articles: Array<Article>
 }

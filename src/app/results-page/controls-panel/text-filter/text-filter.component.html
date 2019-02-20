@@ -1,1 +1,2 @@
-<input type="text" placeholder="Type your text..."><button>Filter</button>
+<input #filterInput type="text" placeholder="Type your text...">
+<button (click)="onFilterClick(filterInput.value)">Filter</button>

@@ -13,4 +13,8 @@ export interface SourcesResponse {
     sources: Array<SourceResponseItem>
 }
 
+export interface Source {
+    name: string,
+    id: string
+}
 

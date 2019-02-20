@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ApiService } from '../../../services/api.service';
 import { ArticlesService } from '../../../services/articles.service';
+import { Source } from '../../../models/Source'
 
 @Component({
   selector: 'app-source-select',
@@ -8,22 +8,22 @@ import { ArticlesService } from '../../../services/articles.service';
   styleUrls: ['./source-select.component.scss']
 })
 export class SourceSelectComponent implements OnInit {
-  public sources: string[] = ['Local news'];
+  public sources: Array<Source> = [{name: 'Local news', id: 'local'}];
   
   constructor(
-    private apiService: ApiService,
     private articlesService: ArticlesService
   ) { }
 
   ngOnInit() {
-    this.apiService.getSources().subscribe(
+    this.articlesService.getSources().subscribe(
       (response) => this.sources = [...this.sources, ...response],
       (error) => console.log(error)
     );
-    this.articlesService.updatedSource.emit(this.sources[0]);
+    this.articlesService.onChangeSource(this.sources[0]);
   }
 
   onChangeOption(source: string): void {
-    this.articlesService.updatedSource.emit(source);
+    const newSource = this.sources.find(item => item.name === source);
+    this.articlesService.onChangeSource(newSource);
   }
 }

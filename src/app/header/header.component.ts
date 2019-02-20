@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ArticlesService } from '../services/articles.service'
+import { ArticlesService } from '../services/articles.service';
 
 @Component({
   selector: 'app-header',
@@ -12,8 +12,8 @@ export class HeaderComponent implements OnInit {
   constructor(private articlesService: ArticlesService) { }
 
   ngOnInit() {
-    this.articlesService.updatedSource.subscribe((sourceValue: string) => {
-      this.source = sourceValue;
+    this.articlesService.updatedSource.subscribe((source: string) => {
+      this.source = source;
     })
   }
 }
