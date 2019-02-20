@@ -18,6 +18,11 @@ const accessLogStream = fs.createWriteStream(path.join(__dirname, './logs/server
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+    next();
+});
 app.use(express.urlencoded({
     extended: true
 }));
