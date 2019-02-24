@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ArticlesService } from '../services/articles.service';
-import * as articlesList from '../../assets/articles-mock.json';
-import * as sources from '../../assets/sources-mock.json';
+import { Article } from '../models/Article';
 
 @Component({
   selector: 'app-results-page',
@@ -10,41 +9,37 @@ import * as sources from '../../assets/sources-mock.json';
 })
 
 export class ResultsPageComponent implements OnInit {
-  public articles: object[] = [];
-  public sources: string[] = sources;
+  public articles: Array<Article> = [];
   public selectedSource: string;
   public query: string;
   public limit: number = 4;
   public onlyLocal: boolean = false;
 
-  constructor(
-    private articlesService: ArticlesService
-  ) { }
+  constructor(private articlesService: ArticlesService) { }
 
   ngOnInit() {
+    this.articlesService.getArticles().subscribe((articles) => {
+      this.articles = articles;
+    })
     this.articlesService.updateFiterValue.subscribe((value: string) => {
       this.query = value;
     });
     this.articlesService.updateLocalFilter.subscribe((localFilterValue: boolean) => {
       this.onlyLocal = localFilterValue;
     });
-    this.articlesService.updateArticles.subscribe((articles: [{}]) => {
+    this.articlesService.updateArticles.subscribe((articles: Array<Article>) => {
       this.articles = articles;
       this.limit = 4;
     });
   }
 
-  isAllNewsLoaded(): boolean {
+  public isAllNewsLoaded(): boolean {
     return this.articles.length <= this.limit;
   }
 
-  onLoadMoreClick(): void {
+  public onLoadMoreClick(): void {
     if (!this.isAllNewsLoaded()) {  
       this.limit += 3;
     }
-  }
-
-  onDeleteClick(): void {
-
   }
 }

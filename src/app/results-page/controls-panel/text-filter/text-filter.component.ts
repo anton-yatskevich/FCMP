@@ -10,10 +10,9 @@ export class TextFilterComponent implements OnInit {
 
   constructor(private articlesService: ArticlesService) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
-  onFilterClick(value: string) {
+  public onFilterClick(value: string) {
     this.articlesService.updateFiterValue.emit(value);
   }
 }

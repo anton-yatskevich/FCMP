@@ -7,15 +7,16 @@ import { ArticlesService } from '../../../services/articles.service'
   styleUrls: ['./local-filter.component.scss']
 })
 export class LocalFilterComponent implements OnInit {
-  checked: boolean = false;
+  public checked: boolean = false;
+
   constructor(private articlesService: ArticlesService) { }
 
   ngOnInit() {
     this.articlesService.updateLocalFilter.emit(this.checked);
   }
 
-  toggleFilterValue(e) {
-    this.checked= e.target.checked;
+  public toggleFilterValue(e) {
+    this.checked = e.target.checked;
     this.articlesService.updateLocalFilter.emit(this.checked);
   }
 }

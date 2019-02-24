@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ArticlesService } from '../../../services/articles.service';
 import { Source } from '../../../models/Source'
 
@@ -22,7 +22,7 @@ export class SourceSelectComponent implements OnInit {
     this.articlesService.onChangeSource(this.sources[0]);
   }
 
-  onChangeOption(source: string): void {
+  public onChangeOption(source: string): void {
     const newSource = this.sources.find(item => item.name === source);
     this.articlesService.onChangeSource(newSource);
   }

@@ -7,7 +7,7 @@
     </a>
     <div class="article-description">
         <p>{{article.description}}</p>
-        <a [routerLink]="['article', article.id]" [routerLinkActive]="'active-link'">
+        <a [routerLink]="['article', article._id]">
           Read more...
         </a>
         <p class="article-description-footer">
@@ -18,6 +18,6 @@
   </div>
   <div class="buttons-wrapper" *ngIf="article.isLocal">
     <button [routerLink]="['/edit', article._id]">Edit</button>
-    <button>Delete</button>
+    <button (click)="onDeleteHandler()">Delete</button>
   </div>
 </article>

@@ -9,9 +9,10 @@ export interface Article {
     description: string,
     url: string,
     urlToImage: string,
-    publishedAt: string,
+    publishedAt: number,
     content: string,
-    isLocal?: boolean
+    isLocal?: boolean,
+    _id?: string
 }
 
 export interface ArticleResponse {

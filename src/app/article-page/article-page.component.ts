@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import * as articles from '../../assets/articles-mock.json';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ArticlesService } from '../services/articles.service';
+import { Article } from '../models/Article';
 
 @Component({
   selector: 'app-article-page',
@@ -8,21 +9,23 @@ import * as articles from '../../assets/articles-mock.json';
   styleUrls: ['./article-page.component.scss']
 })
 
-export class ArticlePageComponent implements OnInit, OnDestroy {
-  id: number;
-  article: object;
-  private sub: any;
+export class ArticlePageComponent implements OnInit {
+  public article: Article;
+  private id: number;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private articlesService: ArticlesService
+  ) {}
 
   ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
-      this.id = +params['id']; 
-      this.article = articles.find(item => item.id === this.id);
-   });
+    this.id = this.route.snapshot.params['id']
+    this.article = this.articlesService.getArticleById(this.id);
   }
 
-  ngOnDestroy() {
-    this.sub.unsubscribe();
+  public onDeleteHandler() {
+    this.articlesService.deleteArticleById(this.id);
+    this.router.navigate(['/results']);
   }
 }

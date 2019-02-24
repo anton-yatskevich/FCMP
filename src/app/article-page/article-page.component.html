@@ -7,9 +7,9 @@
     <p>Author: {{article.author}}</p>
   </div>
   <div>
-    <div class="buttons-wrapper" *ngIf="article.isLocalArticle">
-      <button [routerLink]="['/edit', article.id]">Edit</button>
-      <button>Delete</button>
+    <div class="buttons-wrapper" *ngIf="article.isLocal">
+      <button [routerLink]="['/edit', article._id]">Edit</button>
+      <button (click)="onDeleteHandler()">Delete</button>
     </div>
   </div>
 </div>

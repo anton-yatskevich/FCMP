@@ -6,14 +6,15 @@ import { ArticlesService } from '../services/articles.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
+
 export class HeaderComponent implements OnInit {
-  public source: string;
+  public title: string;
 
   constructor(private articlesService: ArticlesService) { }
 
   ngOnInit() {
-    this.articlesService.updatedSource.subscribe((source: string) => {
-      this.source = source;
-    })
+    this.articlesService.updatedHeader.subscribe((value: string) => {
+      this.title = value;
+    });
   }
 }
