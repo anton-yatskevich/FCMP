@@ -20,7 +20,7 @@ export class ArticlePageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.id = this.route.snapshot.params['id']
+    this.id = this.route.snapshot.params['id'];
     this.article = this.articlesService.getArticleById(this.id);
   }
 
