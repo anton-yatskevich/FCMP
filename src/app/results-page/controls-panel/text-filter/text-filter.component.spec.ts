@@ -2,7 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TextFilterComponent } from './text-filter.component';
 import { ArticlesService } from '../../../services/articles.service';
-import { of } from 'rxjs';
 
 describe('TextFilterComponent', () => {
   let component: TextFilterComponent;

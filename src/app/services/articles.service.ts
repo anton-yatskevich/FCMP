@@ -63,17 +63,17 @@ export class ArticlesService {
   public deleteArticleById(id) {
     this.articles = this.articles.filter(article => article._id !== id);
     this.updateArticles.emit(this.articles);
-    this.http.delete(`${LOCAL_URL}/news/${id}`, { ...this.httpOptions, responseType: 'text'}).subscribe();
+    this.http.delete(`${LOCAL_URL}/news/${id}`).subscribe();
   }
 
   public addArticle(article) {
-    this.http.post(`${LOCAL_URL}/news`, JSON.stringify(article), { ...this.httpOptions, responseType: 'text'}).subscribe(() => {
+    this.http.post(`${LOCAL_URL}/news`, JSON.stringify(article)).subscribe(() => {
       this.getArticles().subscribe();
     });
   }
 
   public editArticle(article, id) {
-    this.http.put(`${LOCAL_URL}/news/${id}`, JSON.stringify(article), { ...this.httpOptions, responseType: 'text'}).subscribe(() => {
+    this.http.put(`${LOCAL_URL}/news/${id}`, JSON.stringify(article)).subscribe(() => {
       this.getArticles().subscribe();
     });
   }
