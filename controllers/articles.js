@@ -9,9 +9,10 @@ function getArticle(id) {
 }
 
 function saveArticle(article) {
+    console.log(article);
     return getArticles()
         .then(articles => {
-            const articleWithId = Object.assign({}, { isLocal: true }, article);
+            const articleWithId = Object.assign({}, article);
             const ArticleModel = new Article(articleWithId);
             return ArticleModel.save();
         });

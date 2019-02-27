@@ -11,7 +11,8 @@ const ArticleSchema = new mongoose.Schema ({
     url: String,
     urlToImage: String,
     publishedAt: { type: Date, default: Date.now },
-    content: String
+    content: String,
+    isLocal: Boolean
 });
 
 module.exports = mongoose.model('articles', ArticleSchema);
