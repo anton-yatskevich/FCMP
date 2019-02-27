@@ -67,13 +67,13 @@ export class ArticlesService {
   }
 
   public addArticle(article) {
-    this.http.post(`${LOCAL_URL}/news`, JSON.stringify(article)).subscribe(() => {
+    this.http.post(`${LOCAL_URL}/news`, JSON.stringify(article), this.httpOptions).subscribe(() => {
       this.getArticles().subscribe();
     });
   }
 
   public editArticle(article, id) {
-    this.http.put(`${LOCAL_URL}/news/${id}`, JSON.stringify(article)).subscribe(() => {
+    this.http.put(`${LOCAL_URL}/news/${id}`, JSON.stringify(article), this.httpOptions).subscribe(() => {
       this.getArticles().subscribe();
     });
   }

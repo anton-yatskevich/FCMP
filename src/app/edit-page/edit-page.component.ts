@@ -76,7 +76,7 @@ export class EditPageComponent implements OnInit {
       if (this.id) {
         this.articlesService.editArticle(article, this.id);
       } else {
-        this.articlesService.addArticle(article);
+        this.articlesService.addArticle({...article, isLocal: true});
       }
       this.router.navigate(['/results']);
     }

@@ -30,8 +30,15 @@
             margin-right: 20px;
         }
 
-        input {
-            min-width: 400px;
+        input, textarea {
+            width: 400px;
+        }
+
+        textarea {
+            padding: 4px;
+            margin-right: 10px;
+            min-height: 80px;
+            resize: none;
         }
     }
 }
